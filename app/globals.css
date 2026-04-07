@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colors — from Figma variables */
+  --color-light-cream: #f5efe0;
+  --color-dark-cream:  #bfb098;
+  --color-black-grey:  #2c2923;
+  --color-orange:      #ce6223;
+  --color-brown:       #59220e;
+  --color-gold:        #b78d09;
+  --color-paper:       #8b6546;
+  --color-marron-20:   #f4ece4;
+  --color-orange-action: #f3900d;
+
+  /* Font */
+  --font-sans: var(--font-pp-neue), sans-serif;
+
+  /* Spacing scale (8px base) */
+  --spacing-1:  4px;
+  --spacing-2:  8px;
+  --spacing-3:  12px;
+  --spacing-4:  16px;
+  --spacing-6:  24px;
+  --spacing-8:  32px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-24: 96px;
+  --spacing-40: 160px;
+
+  /* Layout */
+  --max-width-site: 1512px;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-light-cream);
+  color: var(--color-black-grey);
+  font-family: var(--font-sans);
+  font-weight: 375;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Clip-path utility for TextReveal animation */
+.clip-reveal {
+  clip-path: inset(0 0 100% 0);
+}
