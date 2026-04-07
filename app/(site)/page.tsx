@@ -1,4 +1,8 @@
 import Hero from '@/components/sections/Hero'
+import AboutIntro from '@/components/sections/AboutIntro'
+import WhatIsOn from '@/components/sections/WhatIsOn'
+import ArtistsResidenciesSection from '@/components/sections/ArtistsResidenciesSection'
+import LocationSection from '@/components/sections/LocationSection'
 
 export default function Home() {
   return (
@@ -7,11 +11,12 @@ export default function Home() {
         title="Don't Miss"
         subtitle="AlUla Arts Festival 2026"
         imageSrc="/images/placeholder.jpg"
-        imageAlt="Villa Hegra"
+        imageAlt="Villa Hegra hero"
       />
-      <div className="min-h-screen bg-[#f5efe0] px-5 lg:px-12 py-24 flex items-center">
-        <p className="text-lg max-w-xl opacity-70">Content sections coming soon…</p>
-      </div>
+      <AboutIntro />
+      <WhatIsOn />
+      <ArtistsResidenciesSection />
+      <LocationSection />
     </main>
   )
 }
