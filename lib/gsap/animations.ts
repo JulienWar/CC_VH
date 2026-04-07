@@ -1,5 +1,4 @@
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 /** Stagger reveal for card grids */
 export function staggerReveal(

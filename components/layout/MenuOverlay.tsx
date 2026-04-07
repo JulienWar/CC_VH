@@ -1,6 +1,8 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import gsap from 'gsap'
 
 interface MenuOverlayProps {
   isOpen: boolean
@@ -26,21 +28,71 @@ const secondaryNav = [
 ]
 
 export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
+  const panelRef = useRef<HTMLDivElement>(null)
+  const backdropRef = useRef<HTMLDivElement>(null)
+  const tlRef = useRef<gsap.core.Timeline | null>(null)
+  const initialised = useRef(false)
+
+  useEffect(() => {
+    const panel = panelRef.current
+    const backdrop = backdropRef.current
+    if (!panel || !backdrop) return
+
+    const navItems = panel.querySelectorAll('[data-nav-item]')
+
+    if (!initialised.current) {
+      // Silent first mount — set off-screen without transitioning
+      gsap.set(panel, { x: '100%' })
+      gsap.set(backdrop, { opacity: 0, pointerEvents: 'none' })
+      gsap.set(navItems, { y: 40, opacity: 0 })
+      initialised.current = true
+      return
+    }
+
+    tlRef.current?.kill()
+    const tl = gsap.timeline()
+    tlRef.current = tl
+
+    if (isOpen) {
+      tl.set(backdrop, { pointerEvents: 'auto' })
+        .to(backdrop, { opacity: 1, duration: 0.3, ease: 'none' })
+        .to(panel, { x: '0%', duration: 0.6, ease: 'power3.out' }, 0)
+        .to(navItems, {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power3.out',
+          stagger: 0.06,
+        }, 0.25)
+    } else {
+      tl.to(navItems, {
+          y: 40,
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power3.in',
+          stagger: 0.04,
+        })
+        .to(panel, { x: '100%', duration: 0.5, ease: 'power3.in' }, 0.1)
+        .to(backdrop, { opacity: 0, duration: 0.4, ease: 'none' }, 0)
+        .set(backdrop, { pointerEvents: 'none' })
+    }
+
+    return () => { tl.kill() }
+  }, [isOpen])
+
   return (
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 z-[99] bg-black/20 transition-opacity duration-300 ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        ref={backdropRef}
+        className="fixed inset-0 z-[99] bg-black/20"
         onClick={onClose}
       />
 
       {/* Panel */}
       <div
-        className={`fixed right-0 top-0 z-[100] w-[624px] max-w-full h-full bg-[#f5efe0] flex flex-col px-[50px] lg:px-[130px] py-8 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        ref={panelRef}
+        className="fixed right-0 top-0 z-[100] w-[624px] max-w-full h-full bg-[#f5efe0] flex flex-col px-[50px] lg:px-[130px] py-8"
       >
         {/* Close button */}
         <button
@@ -51,7 +103,7 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
           ×
         </button>
 
-        {/* Logo mark (VH symbol) */}
+        {/* Logo mark */}
         <div className="mb-12 text-xl font-medium tracking-wider text-[#2c2923]">
           VH
         </div>
@@ -63,6 +115,7 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
               key={item.label}
               href={item.href}
               onClick={onClose}
+              data-nav-item
               className="text-[32px] font-medium text-[#2c2923] leading-tight hover:opacity-50 transition-opacity"
             >
               {item.label}
@@ -77,6 +130,7 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
               key={item.label}
               href={item.href}
               onClick={onClose}
+              data-nav-item
               className="text-base text-[#2c2923] opacity-60 hover:opacity-100 transition-opacity"
             >
               {item.label}

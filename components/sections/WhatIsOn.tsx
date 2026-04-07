@@ -23,7 +23,7 @@ const SAMPLE_EVENTS = [
     image: '/images/placeholder.jpg',
     imageAlt: 'Not Deserted: Archives in Movement Exhibition',
     category: 'Exhibitions',
-    title: 'Not Deserted: AlUla's Archives in Movement Exhibition',
+    title: "Not Deserted: AlUla\u2019s Archives in Movement Exhibition",
     date: 'January – February 2026',
     location: 'Villa Hegra',
     href: '#',
