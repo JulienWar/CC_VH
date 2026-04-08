@@ -11,10 +11,10 @@ const UPCOMING_EVENTS = [
 ]
 
 const PAST_EVENTS = [
-  { id: '6', image: '/images/event-3.jpg', imageAlt: 'Art Paris 2025', category: 'Exhibitions', title: 'Art Paris 2025 – Villa Hegra Exhibition', date: 'April 2025', location: 'Villa Hegra', href: '#', isPast: true },
-  { id: '7', image: '/images/event-1.jpg', imageAlt: 'Crossings by the Junior Ballet', category: 'Events', title: 'Crossings by the Junior Ballet of the Op\u00e9ra national de Paris', date: 'December 2024', location: 'Villa Hegra', href: '#', isPast: true },
-  { id: '8', image: '/images/event-2.jpg', imageAlt: 'Night with the Opéra national de Paris', category: 'Events', title: 'Night with the Op\u00e9ra national de Paris', date: 'January 2024', location: 'Villa Hegra', href: '#', isPast: true },
-  { id: '9', image: '/images/event-5.jpg', imageAlt: 'Cine-concerts', category: 'Cinema', title: 'Cine-concerts', date: 'November 2023', location: 'Villa Hegra', href: '#', isPast: true },
+  { id: '6', image: '/images/past-event-1.jpg', imageAlt: 'Art Paris 2025', category: 'Exhibitions', title: 'Art Paris 2025 – Villa Hegra Exhibition', date: 'April 2025', location: 'Villa Hegra', href: '#', isPast: true },
+  { id: '7', image: '/images/past-event-2.jpg', imageAlt: 'Crossings by the Junior Ballet', category: 'Events', title: 'Crossings by the Junior Ballet of the Op\u00e9ra national de Paris', date: 'December 2024', location: 'Villa Hegra', href: '#', isPast: true },
+  { id: '8', image: '/images/past-event-3.jpg', imageAlt: 'Night with the Opéra national de Paris', category: 'Events', title: 'Night with the Op\u00e9ra national de Paris', date: 'January 2024', location: 'Villa Hegra', href: '#', isPast: true },
+  { id: '9', image: '/images/past-event-4.jpg', imageAlt: 'Cine-concerts', category: 'Cinema', title: 'Cine-concerts', date: 'November 2023', location: 'Villa Hegra', href: '#', isPast: true },
 ]
 
 export default function ProgrammingPage() {
