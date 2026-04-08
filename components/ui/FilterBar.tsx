@@ -44,20 +44,24 @@ export default function FilterBar({
       )}
 
       {/* Time text filters (Today, This week, This month) */}
-      {timeFilters.map((f) => (
-        <button
-          key={f.value}
-          onClick={() => onTimeChange?.(f.value)}
-          className={`text-[32px] leading-none pb-1 border-b-2 transition-colors ${
-            activeTime === f.value
-              ? 'border-[#2c2923]'
-              : 'border-transparent opacity-50 hover:opacity-80'
-          }`}
-          style={{ fontWeight: 500 }}
-        >
-          {f.label}
-        </button>
-      ))}
+      {timeFilters.length > 0 && (
+        <div className="flex items-center gap-6 mr-2">
+          {timeFilters.map((f) => (
+            <button
+              key={f.value}
+              onClick={() => onTimeChange?.(f.value)}
+              className={`text-[32px] leading-none pb-1 border-b-2 transition-colors ${
+                activeTime === f.value
+                  ? 'border-[#2c2923]'
+                  : 'border-transparent opacity-50 hover:opacity-80'
+              }`}
+              style={{ fontWeight: 500 }}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       {timeFilters.length > 0 && categoryFilters.length > 0 && (
         <div className="h-8 w-px bg-[#2c2923] opacity-20 mx-1" />
