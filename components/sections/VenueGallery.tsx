@@ -27,7 +27,29 @@ export default function VenueGallery() {
   }
 
   return (
-    <section className="py-8">
+    <section className="py-[80px]">
+      {/* Navigation arrows — above cards */}
+      <div className="flex justify-end gap-2 px-5 lg:px-12 mb-4 max-w-[1440px] mx-auto">
+        <button
+          onClick={() => scroll('left')}
+          className="text-[#2c2923] opacity-60 hover:opacity-100 transition-opacity"
+          aria-label="Previous"
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          </svg>
+        </button>
+        <button
+          onClick={() => scroll('right')}
+          className="text-[#2c2923] opacity-60 hover:opacity-100 transition-opacity"
+          aria-label="Next"
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+          </svg>
+        </button>
+      </div>
+
       <div
         ref={scrollRef}
         className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
@@ -72,28 +94,6 @@ export default function VenueGallery() {
             )
           })}
         </div>
-      </div>
-
-      {/* Navigation arrows */}
-      <div className="flex justify-end gap-2 px-5 lg:px-12 mt-4 max-w-[1440px] mx-auto">
-        <button
-          onClick={() => scroll('left')}
-          className="text-[#2c2923] opacity-60 hover:opacity-100 transition-opacity"
-          aria-label="Previous"
-        >
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-          </svg>
-        </button>
-        <button
-          onClick={() => scroll('right')}
-          className="text-[#2c2923] opacity-60 hover:opacity-100 transition-opacity"
-          aria-label="Next"
-        >
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-          </svg>
-        </button>
       </div>
     </section>
   )
