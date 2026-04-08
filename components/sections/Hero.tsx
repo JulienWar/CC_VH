@@ -98,7 +98,7 @@ export default function Hero({ title, subtitle, imageSrc, imageAlt }: HeroProps)
           style={{ fontWeight: 375 }}
         >
           {words.map((word, i) => (
-            <span key={i} className="inline-block overflow-hidden mr-[0.25em]">
+            <span key={i} className="inline-block overflow-hidden mr-[0.25em] pt-[0.05em] pb-[0.15em]">
               <span data-word className="inline-block">
                 {word}
               </span>

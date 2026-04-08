@@ -1,16 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import Link from 'next/link'
 import EventCard from '@/components/ui/EventCard'
-import StaggerReveal from '@/components/animations/StaggerReveal'
-import FilterBar from '@/components/ui/FilterBar'
-import CTAButton from '@/components/ui/CTAButton'
 import TextReveal from '@/components/animations/TextReveal'
 
-const SAMPLE_EVENTS = [
+const EVENTS = [
   {
     id: '1',
-    image: '/images/placeholder.jpg',
+    image: '/images/event-1.jpg',
     imageAlt: 'AlUla Arts Festival 2026 – Vertigo',
     category: 'Events',
     title: 'AlUla Arts Festival 2026 – Vertigo',
@@ -20,8 +17,8 @@ const SAMPLE_EVENTS = [
   },
   {
     id: '2',
-    image: '/images/placeholder.jpg',
-    imageAlt: 'Not Deserted: Archives in Movement Exhibition',
+    image: '/images/event-2.jpg',
+    imageAlt: "Not Deserted: AlUla's Archives in Movement Exhibition",
     category: 'Exhibitions',
     title: "Not Deserted: AlUla\u2019s Archives in Movement Exhibition",
     date: 'January – February 2026',
@@ -30,7 +27,7 @@ const SAMPLE_EVENTS = [
   },
   {
     id: '3',
-    image: '/images/placeholder.jpg',
+    image: '/images/event-3.jpg',
     imageAlt: 'AlUla Arts Festival 2026 – Urban dance Showcase',
     category: 'Events',
     title: 'AlUla Arts Festival 2026 – Urban dance Showcase',
@@ -40,17 +37,17 @@ const SAMPLE_EVENTS = [
   },
   {
     id: '4',
-    image: '/images/placeholder.jpg',
+    image: '/images/event-4.jpg',
     imageAlt: 'Les Mains by Auguste Rodin',
     category: 'Exhibitions',
-    title: '"Les Mains" by Auguste Rodin',
+    title: '\u201cLes Mains\u201d by Auguste Rodin',
     date: 'November 2025',
     location: 'Villa Hegra',
     href: '#',
   },
   {
     id: '5',
-    image: '/images/placeholder.jpg',
+    image: '/images/event-5.jpg',
     imageAlt: 'Film Appreciation Programme',
     category: 'Cinema',
     title: 'Film Appreciation Programme',
@@ -60,62 +57,77 @@ const SAMPLE_EVENTS = [
   },
 ]
 
-const categoryFilters = [
-  { label: 'All', value: 'all' },
-  { label: 'Cinéma', value: 'cinema' },
-  { label: 'Exhibitions', value: 'exhibitions' },
-  { label: 'Events', value: 'events' },
-  { label: 'Workshops', value: 'workshops' },
-]
-
 export default function WhatIsOn() {
-  const [activeCategory, setActiveCategory] = useState('all')
-
-  const filtered =
-    activeCategory === 'all'
-      ? SAMPLE_EVENTS
-      : SAMPLE_EVENTS.filter(
-          (e) => e.category.toLowerCase() === activeCategory
-        )
-
   return (
-    <section className="py-16 lg:py-24">
-      <div className="px-5 lg:px-12 max-w-[1512px] mx-auto mb-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
-        <TextReveal
-          as="h2"
-          className="text-[clamp(40px,5vw,80px)] leading-none"
-          stagger={0.05}
-        >
-          What&apos;s On
-        </TextReveal>
-        <div className="flex flex-col lg:items-end gap-4">
-          <p className="text-base opacity-70 max-w-xs">
-            Discover our artistic and cultural programming
-          </p>
-          <CTAButton label="See all events" href="/programming" variant="arrow" />
+    <section className="bg-[#f5efe0]">
+      {/* Header row — two columns with justify-between */}
+      <div className="px-5 lg:px-12 max-w-[1440px] mx-auto py-12 lg:py-16">
+        <div className="flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-24 min-h-[200px]">
+
+          {/* Left col — heading at top, CTA at bottom */}
+          <div className="flex flex-col justify-between gap-8 lg:w-[696px] shrink-0">
+            <TextReveal
+              as="h2"
+              className="text-[clamp(48px,6vw,96px)] leading-[1.2] text-[#2c2923]"
+              stagger={0.05}
+            >
+              What&apos;s On
+            </TextReveal>
+
+            {/* "See all events" CTA — 24px Medium + arrow_forward */}
+            <Link
+              href="/programming"
+              className="inline-flex items-center gap-2 text-[24px] text-[#2c2923] py-[6px] hover:opacity-70 transition-opacity w-fit"
+              style={{ fontWeight: 500 }}
+            >
+              See all events
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="shrink-0">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+              </svg>
+            </Link>
+          </div>
+
+          {/* Right col — description at top, arrows at bottom */}
+          <div className="flex flex-col justify-between items-start lg:items-end flex-1 pt-0 lg:pt-4 gap-8">
+            <p
+              className="text-[#2c2923] text-[clamp(18px,2.1vw,32px)] leading-[1.2] lg:text-right"
+              style={{ fontWeight: 375 }}
+            >
+              Discover our artistic<br className="hidden lg:block" />
+              and cultural programming
+            </p>
+
+            {/* Prev / Next arrows — 32px keyboard_arrow icons */}
+            <div className="flex items-center gap-4">
+              <button
+                className="text-[#2c2923] opacity-60 hover:opacity-100 transition-opacity"
+                aria-label="Previous"
+              >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+              </button>
+              <button
+                className="text-[#2c2923] opacity-60 hover:opacity-100 transition-opacity"
+                aria-label="Next"
+              >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div className="px-5 lg:px-12 max-w-[1512px] mx-auto mb-6">
-        <FilterBar
-          categoryFilters={categoryFilters}
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-          showArrows
-        />
-      </div>
-
-      <div className="overflow-x-auto">
-        <StaggerReveal
-          className="flex gap-1 px-5 lg:px-12"
-          stagger={0.06}
-        >
-          {filtered.map((event) => (
-            <div key={event.id} className="shrink-0 w-[354px]">
-              <EventCard {...event} />
-            </div>
+      {/* Cards row — horizontal scroll, no visible scrollbar */}
+      <div className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="cards-row flex gap-1">
+          {EVENTS.map((event) => (
+            <EventCard key={event.id} {...event} />
           ))}
-        </StaggerReveal>
+        </div>
       </div>
     </section>
   )

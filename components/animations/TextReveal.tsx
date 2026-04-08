@@ -18,7 +18,7 @@ function buildWordSpans(text: string): string {
     .split(' ')
     .map(
       (word) =>
-        `<span class="inline-block overflow-hidden mr-[0.2em]"><span data-word class="inline-block">${word}</span></span>`
+        `<span class="inline-block overflow-hidden mr-[0.2em] pt-[0.05em] pb-[0.15em]"><span data-word class="inline-block">${word}</span></span>`
     )
     .join('')
 }

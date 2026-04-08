@@ -3,7 +3,7 @@ import Link from 'next/link'
 const footerLinks = [
   { label: 'Access & Contact', href: '#' },
   { label: 'Press', href: '#' },
-  { label: 'Support Us', href: '#' },
+  { label: 'Support us', href: '#' },
   { label: 'Team', href: '#' },
   { label: 'Terms & Conditions', href: '#' },
   { label: 'Privacy Policy', href: '#' },
@@ -12,63 +12,75 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#2c2923] text-[#f5efe0]">
-      <div className="max-w-[1512px] mx-auto px-5 lg:px-12 py-8">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-          {/* Logo wordmark */}
-          <div className="text-sm font-medium tracking-[0.2em] uppercase opacity-90">
-            Villa Hegra
-          </div>
+    <footer className="bg-[#2c2923] text-[#f5efe0] px-5 lg:px-[60px] py-8">
+      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
-          {/* Nav links */}
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            {footerLinks.map((link) => (
+        {/* Logo — two SVGs stacked in 192×89 container */}
+        <Link
+          href="/"
+          className="relative shrink-0 block"
+          style={{ width: '192px', height: '89px' }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo-group.svg"
+            alt="Villa Hegra"
+            width="152"
+            height="30"
+            className="block absolute"
+            style={{ top: '17px', left: '20px' }}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo-group1.svg"
+            alt=""
+            width="152"
+            height="18"
+            className="block absolute"
+            style={{ top: '51px', left: '20px' }}
+          />
+        </Link>
+
+        {/* Nav links — 16px Medium, dot separators */}
+        <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 opacity-80" aria-label="Footer navigation">
+          {footerLinks.map((link, i) => (
+            <span key={link.label} className="flex items-center gap-2">
+              {i > 0 && (
+                <span className="w-1 h-1 rounded-full bg-[#f5efe0] opacity-60 shrink-0" />
+              )}
               <Link
-                key={link.label}
                 href={link.href}
-                className="text-xs opacity-50 hover:opacity-90 transition-opacity"
+                className="text-[16px] text-[#f5efe0] hover:opacity-100 opacity-80 transition-opacity"
+                style={{ fontWeight: 375 }}
               >
                 {link.label}
               </Link>
-            ))}
-          </nav>
+            </span>
+          ))}
+        </nav>
 
-          {/* Social icons */}
-          <div className="flex gap-4 items-center">
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-              className="opacity-50 hover:opacity-100 transition-opacity"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-              </svg>
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="opacity-50 hover:opacity-100 transition-opacity"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="opacity-50 hover:opacity-100 transition-opacity"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-              </svg>
-            </a>
-          </div>
+        {/* Social icons — 40×40 each */}
+        <div className="flex gap-4 items-center opacity-80">
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+             className="w-10 h-10 flex items-center justify-center hover:opacity-100 opacity-80 transition-opacity">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.582 6.186c-.23-.86-.908-1.538-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418c-.86.23-1.538.908-1.768 1.768C2 7.746 2 12 2 12s0 4.254.418 5.814c.23.86.908 1.538 1.768 1.768C5.746 20 12 20 12 20s6.254 0 7.814-.418c.86-.23 1.538-.908 1.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814zM10 15V9l5.2 3L10 15z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+             className="w-10 h-10 flex items-center justify-center hover:opacity-100 opacity-80 transition-opacity">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zm2-3a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+            </svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+             className="w-10 h-10 flex items-center justify-center hover:opacity-100 opacity-80 transition-opacity">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
         </div>
       </div>
     </footer>

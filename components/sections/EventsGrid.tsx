@@ -20,6 +20,7 @@ interface Event {
 interface EventsGridProps {
   events: Event[]
   showTimeFilter?: boolean
+  dropdownLabel?: string
   cardSize?: 'small' | 'medium'
 }
 
@@ -31,7 +32,7 @@ const timeFilters = [
 
 const categoryFilters = [
   { label: 'All', value: 'all' },
-  { label: 'Cinéma', value: 'cinema' },
+  { label: 'Cinema', value: 'cinema' },
   { label: 'Exhibitions', value: 'exhibitions' },
   { label: 'Events', value: 'events' },
   { label: 'Workshops', value: 'workshops' },
@@ -40,6 +41,7 @@ const categoryFilters = [
 export default function EventsGrid({
   events,
   showTimeFilter = true,
+  dropdownLabel,
   cardSize = 'medium',
 }: EventsGridProps) {
   const [activeTime, setActiveTime] = useState('month')
@@ -54,7 +56,7 @@ export default function EventsGrid({
 
   return (
     <div>
-      <div className="px-5 lg:px-12 mb-4">
+      <div className="px-5 lg:px-12 mb-4 max-w-[1440px] mx-auto">
         <FilterBar
           timeFilters={showTimeFilter ? timeFilters : []}
           categoryFilters={categoryFilters}
@@ -63,17 +65,16 @@ export default function EventsGrid({
           onTimeChange={setActiveTime}
           onCategoryChange={setActiveCategory}
           showArrows
+          dropdownLabel={dropdownLabel}
         />
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <StaggerReveal
-          className="flex gap-1 px-5 lg:px-12"
+          className="cards-row flex gap-1"
           stagger={0.06}
         >
           {filtered.map((event) => (
-            <div key={event.id} className="shrink-0 w-[576px]">
-              <EventCard {...event} size={cardSize} />
-            </div>
+            <EventCard key={event.id} {...event} />
           ))}
         </StaggerReveal>
       </div>

@@ -27,8 +27,11 @@
   --spacing-24: 96px;
   --spacing-40: 160px;
 
+  /* Breakpoints */
+  --breakpoint-2xl: 1440px;
+
   /* Layout */
-  --max-width-site: 1512px;
+  --max-width-site: 1440px;
 }
 
 /* Base styles */
@@ -43,6 +46,23 @@ body {
   font-weight: 375;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Card row — flush to edge below 1440, aligned to content above */
+@layer utilities {
+  .cards-row {
+    padding-left: 20px;
+  }
+  @media (min-width: 1024px) {
+    .cards-row {
+      padding-left: 0px;
+    }
+  }
+  @media (min-width: 1440px) {
+    .cards-row {
+      padding-left: max(48px, calc((100vw - 1440px) / 2 + 48px));
+    }
+  }
 }
 
 /* Clip-path utility for TextReveal animation */
