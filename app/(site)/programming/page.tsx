@@ -1,9 +1,8 @@
 import Hero from '@/components/sections/Hero'
 import TextReveal from '@/components/animations/TextReveal'
 import EventsGrid from '@/components/sections/EventsGrid'
-import { getUpcomingEvents, getPastEvents } from '@/sanity/queries'
+import { getPage, getUpcomingEvents, getPastEvents } from '@/sanity/queries'
 
-// ── Static fallback data (used if Sanity is empty or unreachable) ──
 const FALLBACK_UPCOMING = [
   { id: '1', image: '/images/event-1.jpg', imageAlt: 'AlUla Arts Festival 2026 – Vertigo', category: 'Events', title: 'AlUla Arts Festival 2026 – Vertigo', date: 'January – February 2026', location: 'Villa Hegra', href: '#' },
   { id: '2', image: '/images/event-2.jpg', imageAlt: 'Archives in Movement Exhibition', category: 'Exhibitions', title: 'Not Deserted: AlUla\u2019s Archives in Movement Exhibition', date: 'January – February 2026', location: 'Villa Hegra', href: '#' },
@@ -22,14 +21,19 @@ const FALLBACK_PAST = [
 export default async function ProgrammingPage() {
   let upcomingEvents = FALLBACK_UPCOMING
   let pastEvents = FALLBACK_PAST
+  let heroImage = '/images/event-3.jpg'
+  let heroImageAlt = 'Cultural event in AlUla'
 
   try {
-    const [sanityUpcoming, sanityPast] = await Promise.all([
+    const [sanityUpcoming, sanityPast, page] = await Promise.all([
       getUpcomingEvents(),
       getPastEvents(),
+      getPage('programming'),
     ])
     if (sanityUpcoming?.length) upcomingEvents = sanityUpcoming
     if (sanityPast?.length) pastEvents = sanityPast
+    if (page?.heroImage) heroImage = page.heroImage
+    if (page?.heroImageAlt) heroImageAlt = page.heroImageAlt
   } catch {
     // Sanity unreachable — use static fallback
   }
@@ -38,8 +42,8 @@ export default async function ProgrammingPage() {
     <main>
       <Hero
         title="Programming"
-        imageSrc="/images/event-3.jpg"
-        imageAlt="Cultural event in AlUla"
+        imageSrc={heroImage}
+        imageAlt={heroImageAlt}
       />
 
       <section className="px-5 lg:px-12 py-16 max-w-[1440px] mx-auto">

@@ -44,15 +44,47 @@ export async function getPage(slug: string) {
         _key,
         heading,
         body,
+        text,
+        description,
         "image": image.asset->url,
         imageAlt,
         imagePosition,
+        backgroundColor,
         eventType,
         showTimeFilter,
+        // heroHP fields
+        "backgroundImage": backgroundImage.asset->url,
+        cardTitle,
+        cardText,
+        cardLink,
+        cardLinkLabel,
+        // aboutIntro fields
+        ctaLabel,
+        ctaLink,
+        // artistsResidencies fields
+        artistNames,
+        // locationSection fields
+        "mapImage": mapImage.asset->url,
+        // foundingEntities fields
+        "logo1": logo1.asset->url,
+        logo1Alt,
+        "logo2": logo2.asset->url,
+        logo2Alt,
+        // gallery fields
         "images": images[] {
           "url": asset->url,
           alt,
           caption
+        },
+        "items": items[] {
+          "image": image.asset->url,
+          alt,
+          label
+        },
+        // partners
+        "logos": logos[] {
+          "url": asset->url,
+          alt
         }
       }
     }`,
