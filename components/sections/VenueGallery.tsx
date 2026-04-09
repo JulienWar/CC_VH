@@ -12,7 +12,14 @@ const GALLERY_ITEMS = [
   { src: '/images/venue-card-6.jpg', alt: 'Villa Hegra exhibition space', label: 'Villa Hegra exhibition space' },
 ]
 
-export default function VenueGallery() {
+interface VenueGalleryProps {
+  items?: { image: string; alt?: string; label?: string }[]
+}
+
+export default function VenueGallery({ items }: VenueGalleryProps) {
+  const galleryItems = items && items.length > 0
+    ? items.map(item => ({ src: item.image, alt: item.alt || '', label: item.label || '' }))
+    : GALLERY_ITEMS
   const scrollRef = useRef<HTMLDivElement>(null)
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
@@ -55,7 +62,7 @@ export default function VenueGallery() {
         className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       >
         <div className="cards-row flex gap-2 pb-4 snap-x snap-mandatory">
-          {GALLERY_ITEMS.map((item, index) => {
+          {galleryItems.map((item, index) => {
             const isOpen = openIndex === index
             return (
               <div

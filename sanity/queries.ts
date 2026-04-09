@@ -43,6 +43,7 @@ export async function getPage(slug: string) {
         _type,
         _key,
         heading,
+        subtitle,
         body,
         text,
         description,

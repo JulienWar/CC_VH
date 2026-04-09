@@ -35,7 +35,17 @@ const ROW_3 = [
   { src: '/images/partner-31.png', alt: 'Partner logo' },
 ]
 
-export default function PartnersSection() {
+interface PartnersSectionProps {
+  heading?: string
+  logos?: { url: string; alt?: string }[]
+}
+
+export default function PartnersSection({ heading, logos }: PartnersSectionProps) {
+  const displayHeading = heading || 'Partners'
+
+  // If CMS provides logos, use a flat grid; otherwise use the hardcoded rows
+  const cmsLogos = logos && logos.length > 0 ? logos : null
+
   return (
     <section className="bg-[#f5efe0] px-5 lg:px-12 py-12 lg:py-16">
       <div className="max-w-[1440px] mx-auto">
@@ -44,52 +54,58 @@ export default function PartnersSection() {
           className="text-[clamp(48px,5vw,96px)] leading-[1.2] text-[#2c2923] mb-12"
           stagger={0.05}
         >
-          Partners
+          {displayHeading}
         </TextReveal>
 
-        <div className="flex flex-col gap-[32px] py-12">
-          {/* Row 1 */}
-          <div className="flex gap-[16px] items-center flex-wrap lg:flex-nowrap">
-            {ROW_1.map((partner, i) => (
-              <div key={i} className="flex-1 min-w-[120px] h-[90px] flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={partner.src}
-                  alt={partner.alt}
-                  className="max-h-[70px] max-w-full object-contain mix-blend-multiply"
-                />
-              </div>
-            ))}
+        {cmsLogos ? (
+          <div className="flex flex-col gap-[32px] py-12">
+            {/* CMS logos — auto-distribute into rows of 8 */}
+            {Array.from({ length: Math.ceil(cmsLogos.length / 8) }, (_, rowIdx) => {
+              const rowLogos = cmsLogos.slice(rowIdx * 8, (rowIdx + 1) * 8)
+              const isLastRow = rowIdx === Math.ceil(cmsLogos.length / 8) - 1 && rowLogos.length < 8
+              return (
+                <div key={rowIdx} className={`flex gap-[16px] items-center ${isLastRow ? 'justify-center flex-wrap' : 'flex-wrap lg:flex-nowrap'}`}>
+                  {rowLogos.map((logo, i) => (
+                    <div key={i} className={`${isLastRow ? 'w-[120px] lg:w-[163px]' : 'flex-1 min-w-[120px]'} h-[90px] flex items-center justify-center`}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={logo.url} alt={logo.alt || 'Partner logo'} className="max-h-[70px] max-w-full object-contain mix-blend-multiply" />
+                    </div>
+                  ))}
+                </div>
+              )
+            })}
           </div>
-
-          {/* Row 2 */}
-          <div className="flex gap-[16px] items-center flex-wrap lg:flex-nowrap">
-            {ROW_2.map((partner, i) => (
-              <div key={i} className="flex-1 min-w-[120px] h-[90px] flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={partner.src}
-                  alt={partner.alt}
-                  className="max-h-[70px] max-w-full object-contain mix-blend-multiply"
-                />
-              </div>
-            ))}
+        ) : (
+          <div className="flex flex-col gap-[32px] py-12">
+            {/* Row 1 */}
+            <div className="flex gap-[16px] items-center flex-wrap lg:flex-nowrap">
+              {ROW_1.map((partner, i) => (
+                <div key={i} className="flex-1 min-w-[120px] h-[90px] flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={partner.src} alt={partner.alt} className="max-h-[70px] max-w-full object-contain mix-blend-multiply" />
+                </div>
+              ))}
+            </div>
+            {/* Row 2 */}
+            <div className="flex gap-[16px] items-center flex-wrap lg:flex-nowrap">
+              {ROW_2.map((partner, i) => (
+                <div key={i} className="flex-1 min-w-[120px] h-[90px] flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={partner.src} alt={partner.alt} className="max-h-[70px] max-w-full object-contain mix-blend-multiply" />
+                </div>
+              ))}
+            </div>
+            {/* Row 3 — centered */}
+            <div className="flex gap-[16px] items-center justify-center flex-wrap">
+              {ROW_3.map((partner, i) => (
+                <div key={i} className="w-[120px] lg:w-[163px] h-[90px] flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={partner.src} alt={partner.alt} className="max-h-[70px] max-w-full object-contain mix-blend-multiply" />
+                </div>
+              ))}
+            </div>
           </div>
-
-          {/* Row 3 — centered */}
-          <div className="flex gap-[16px] items-center justify-center flex-wrap">
-            {ROW_3.map((partner, i) => (
-              <div key={i} className="w-[120px] lg:w-[163px] h-[90px] flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={partner.src}
-                  alt={partner.alt}
-                  className="max-h-[70px] max-w-full object-contain mix-blend-multiply"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
       </div>
     </section>
   )

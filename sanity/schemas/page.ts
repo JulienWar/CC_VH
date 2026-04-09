@@ -42,7 +42,22 @@ export default defineType({
           type: 'object',
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({ name: 'body', title: 'Body', type: 'blockContent' }),
+            defineField({ name: 'subtitle', title: 'Subtitle (bold)', type: 'string' }),
+            defineField({ name: 'text', title: 'Body text (paragraphs separated by blank lines)', type: 'text', rows: 8 }),
+            defineField({ name: 'body', title: 'Rich text (alternative)', type: 'blockContent' }),
+            defineField({
+              name: 'backgroundColor',
+              title: 'Background color',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Cream', value: 'cream' },
+                  { title: 'Brown', value: 'brown' },
+                ],
+                layout: 'radio',
+              },
+              initialValue: 'cream',
+            }),
           ],
           preview: {
             select: { title: 'heading' },
@@ -55,7 +70,8 @@ export default defineType({
           type: 'object',
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({ name: 'body', title: 'Body', type: 'blockContent' }),
+            defineField({ name: 'text', title: 'Body text (paragraphs separated by blank lines)', type: 'text', rows: 8 }),
+            defineField({ name: 'body', title: 'Rich text (alternative)', type: 'blockContent' }),
             defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
             defineField({ name: 'imageAlt', title: 'Image alt text', type: 'string' }),
             defineField({
